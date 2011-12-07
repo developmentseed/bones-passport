@@ -1,0 +1,17 @@
+{
+  "author": "Developmentseed <info@developmentseed.org> (http://developmentseed.org)",
+  "name": "bones-passport",
+  "description": "Integrate the passport authentication framework into Bones.",
+  "version": "0.0.0",
+  "engines": {
+    "node": "~0.4.12"
+  },
+  "dependencies": {
+    "express": "=2.4.4",
+    "passport": "0.1.3",
+    "passport-oauth": "0.1.1",
+    "passport-local": "0.1.0",
+    "passport-twitter": "0.1.0"
+  },
+  "devDependencies": {}
+}
