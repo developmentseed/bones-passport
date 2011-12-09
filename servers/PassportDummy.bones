@@ -5,6 +5,9 @@ server = servers.Passport.extend({
     key: 'dummy',
     strategy: strategy,
     verify: function(done) {
-      return done(null, {});
+        var user = {
+            id: 'dummy',
+        }
+        return done(null, user);
     }
 });

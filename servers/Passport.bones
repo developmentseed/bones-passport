@@ -7,12 +7,14 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(obj, done) {
-    done(null, obj);
+    done(null, new models.User(obj));
 });
 
 server = Bones.Server.extend({
     options: {},
     initialize: function(app) {
+        var that = this;
+
         var options = app.config && app.config.passport && app.config.passport[this.key];
         this.options.sessionKey = 'auth:' + this.key;
 
@@ -32,4 +34,3 @@ server = Bones.Server.extend({
         });
     }
 });
-
