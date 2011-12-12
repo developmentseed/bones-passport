@@ -10,30 +10,34 @@ Supports dummy, twitter, oauth1 and oauth2 authentication strategies.
 Mount any of the supported authentication strategies in your bones middleware
 server :
 
-  // filename: servers/Middleware.bones
-  var express = require('express');
 
-  servers.Middleware.augment({
-      initialize: function(parent, app) {
-          parent.call(this, app);
-          // session support is required, and is the responsibility
-          // of your application to enable.
-          this.use(express.session({ secret: 'secret' }));
+    // filename: servers/Middleware.bones
+    var express = require('express');
 
-          this.use(new servers.PassportTwitter(app));
-      }
-  });
+    servers.Middleware.augment({
+        initialize: function(parent, app) {
+            parent.call(this, app);
+            // session support is required, and is the responsibility
+            // of your application to enable.
+            this.use(express.session({ secret: 'secret' }));
+
+            this.use(new servers.PassportTwitter(app));
+        }
+    });
+
 
 Configuration settings for the authentication strategies are stored in a 
 `passport.json` file in the root of your application, for example: 
 
-  {
-      "twitter" : {
-          "callbackURL": "http://mydomain:3000/auth/twitter/callback",
-          "consumerKey": "get from dev.twitter.com",
-          "consumerSecret": "get from div.twitter.com"
-      }
-  }
+
+    {
+        "twitter" : {
+            "callbackURL": "http://mydomain:3000/auth/twitter/callback",
+            "consumerKey": "get from dev.twitter.com",
+            "consumerSecret": "get from div.twitter.com"
+        }
+    }
+
 
 You can initiate login by directing your user to `/auth/twitter` in this case,
 although each authentication strategy has it's own url, such as `/auth/dummy`
