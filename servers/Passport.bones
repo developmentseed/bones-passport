@@ -17,7 +17,6 @@ server = Bones.Server.extend({
 
         var options = app.config && app.config.passport && app.config.passport[this.key];
         this.options.sessionKey = 'auth:' + this.key;
-
         options && _.extend(this.options, options);
 
         passport.use(new this.strategy(this.options, this.verify));
