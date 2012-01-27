@@ -19,7 +19,18 @@ server = Bones.Server.extend({
         this.options.sessionKey = 'auth:' + this.key;
         options && _.extend(this.options, options);
 
-        passport.use(new this.strategy(this.options, this.verify));
+        // store the strategy instance in a separate variable, so we can access it easily.
+        var strategy = new this.strategy(this.options, this.verify);
+
+        // mount the passport strategy.
+        passport.use(strategy);
+
+        // give the request access to the strategy instance
+        // to allow re-use of the oauth instance to make requests.
+        this.use(function(req, res, next) {
+            req.passportStrategy = strategy;
+            next();
+        });
 
         this.use(passport.initialize());
         this.use(passport.session());
