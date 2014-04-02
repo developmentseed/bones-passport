@@ -6,6 +6,9 @@ Bones.Command.options['passport'] = {
     'description': 'Path to passport configuration file.',
     'default': function(options, config) {
         var files = config ? config.files : Bones.Command.options['files'].default();
+        if (files === undefined) {
+            files = "";
+        }
         return path.join(files, 'passport.json');
     }
 };
